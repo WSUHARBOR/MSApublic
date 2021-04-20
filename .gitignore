@@ -1,0 +1,5 @@
+MSA/DATA
+MSA/__pycache__
+.pyenv
+.idea
+*.pyc

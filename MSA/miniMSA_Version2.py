@@ -48,6 +48,7 @@ def run():
     #file_date = "{}-{}-{} {}:{}:{}".format(gps_day.month, gps_day.day, gps_day.year, gps_day.hour-7, gps_day.min, gps_day.sec)
     #file_date = datetime.datetime.now()
     
+    os.makedirs("DATA", exist_ok=True)
     
     i=0
     while os.path.exists(r"DATA/file%s.txt" % i):

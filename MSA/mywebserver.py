@@ -17,7 +17,6 @@ def run_MSA():
 	print(MSA.stop)
 	MSA.MT = 0 
 	MSA.stop = False
-	#path = "/home/pi/Desktop/MSA_Webpage/miniMSA_Version2.py"
 	print(MSA.stop)
 	
 
@@ -38,7 +37,7 @@ def stop_msa():
 @app.route('/download')
 def download():
 	MSADATA = "MSADATA"
-	DATA = "/home/pi/Desktop/MSA_Webpage/DATA"
+	DATA = "DATA"
 	shutil.make_archive(MSADATA, 'zip', DATA)
 	path = "MSADATA.zip"
 	download = send_file(path, as_attachment=True)

@@ -50,12 +50,12 @@ def run():
     
     
     i=0
-    while os.path.exists(r"/home/pi/Desktop/MSA_Webpage/DATA/file%s.txt" % i):
+    while os.path.exists(r"DATA/file%s.txt" % i):
         i += 1
     #file_name = file_date
 
     # Create for the winsen data and name it according to the file_name variable
-    winsen_file = open(r"/home/pi/Desktop/MSA_Webpage/DATA/file%s.txt" % i, "w")
+    winsen_file = open(r"DATA/file%s.txt" % i, "w")
 
 
     # Close the newly created file
@@ -99,7 +99,7 @@ def run():
         
      
         # Open our preivously created file, and begin writing to it
-        winsen_file = open(r"/home/pi/Desktop/MSA_Webpage/DATA/file%s.txt" % i, "a+")
+        winsen_file = open(r"DATA/file%s.txt" % i, "a+")
         
         # Write data seperated by commas to the file
        # winsen_file.write(str(Real_time))

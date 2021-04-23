@@ -38,6 +38,7 @@ def stop_msa():
 def download():
 	MSADATA = "MSADATA"
 	DATA = "DATA"
+	os.remove('MSADATA.zip')
 	shutil.make_archive(MSADATA, 'zip', DATA)
 	path = "MSADATA.zip"
 	download = send_file(path, as_attachment=True)

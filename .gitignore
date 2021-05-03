@@ -3,3 +3,4 @@ MSA/__pycache__
 .pyenv
 .idea
 *.pyc
+storage.db

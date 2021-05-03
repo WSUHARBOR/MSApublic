@@ -69,10 +69,10 @@ class GPSReceiver(Process):
                             try:
                                 sentence = pynmea2.parse(buffer)
                                 timestamp = getattr(sentence, 'datetime', timestamp)
-                                latitude = getattr(sentence, 'latitude', latitude)
-                                longitude = getattr(sentence, 'longitude', longitude)
-                                altitude = getattr(sentence, 'altitude', altitude)
-                                dop = getattr(sentence, 'pdop', dop)
+                                latitude = float(getattr(sentence, 'latitude', latitude))
+                                longitude = float(getattr(sentence, 'longitude', longitude))
+                                altitude = float(getattr(sentence, 'altitude', altitude))
+                                dop = float(getattr(sentence, 'pdop', dop))
 
                                 gps_interface.set_current_state(GPSStatus(
                                     timestamp=timestamp,

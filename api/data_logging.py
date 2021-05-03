@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 import os
 import logging
+import platform
 
 from utils import get_conn, get_collection_filepath
 from gps import gps_receiver, NoGPSData
@@ -25,7 +26,7 @@ KNOWN_DATA_COLUMNS = [StoredDataType(x.name, x.short_name, x.unit) for x in WINS
     StoredDataType('Latitude', 'lat', 'degrees'),
     StoredDataType('Longitude', 'lon', 'degrees'),
     StoredDataType('Altitude', 'alt', 'm'),
-    StoredDataType('Precision Dilution of Precision', 'dop', ''),
+    StoredDataType('Position Dilution of Precision', 'dop', ''),
 ]
 
 
@@ -132,9 +133,13 @@ def get_collection_details(collection_id: int) -> Dict[str, Any]:
                 for idx, value in enumerate(entries):
                     if idx in [date_idx, met_idx]:
                         continue
+                    try:
+                        typed_value = float(value)
+                    except:
+                        typed_value = value
                     data_map[column_short_names[idx]]['points'].append({
                         'ts': raw_timestamp,
-                        'value': value
+                        'value': typed_value
                     })
             data = [x for x in data_map.values() if x['points']]
     return {
@@ -225,7 +230,7 @@ class Recorder(Process):
                 # Start a new recording session
                 failed_start_cycles = 0
                 self._true_start_s = collection_datetime.timestamp()
-                self._collection_name: str = collection_datetime.strftime("%Y_%m_%d-%H_%M_%S")
+                self._collection_name: str = collection_datetime.strftime("%Y_%m_%d-%H_%M_%S") + f"-{platform.node()}"
                 cur = db_conn.cursor()
                 cur.execute("""
                     INSERT INTO collections(name, start_s)

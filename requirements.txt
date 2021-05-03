@@ -1,0 +1,6 @@
+flask
+pyserial
+pysqlite3
+pynmea2
+smbus2
+gpiozero

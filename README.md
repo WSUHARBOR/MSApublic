@@ -1,3 +1,2 @@
-# MSApublic
-Public facing Multi-Sensor Array repository for access to firmware. 
-This is where download firmware updates for the Weber State University HARBOR program's Multi-Sensor Array. 
+# MSA Public
+Public facing Multi-Sensor Array repository for access to firmware. The MSA devices will automatically pull updates from this repository when plugged into ethernet.

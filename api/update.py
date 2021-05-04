@@ -5,12 +5,15 @@ import subprocess
 import socket
 
 
+# Time to wait for internet-connected services
 NETWORK_ATTEMPT_TIMEOUT: float = 3.0
 
 
 def _can_connect_to_internet() -> bool:
+    """Check if the Pi is currently hardwired to the internet"""
     try:
         socket.setdefaulttimeout(NETWORK_ATTEMPT_TIMEOUT)
+        # Ping the DNS server
         socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(('8.8.8.8', 53))
         return True
     except:
@@ -18,6 +21,7 @@ def _can_connect_to_internet() -> bool:
 
 
 def _get_application_root() -> Path:
+    """Get the root directory of the MSAv2 data logging application"""
     api_directory: Path = Path(__file__).resolve().parent
     return api_directory.parent
 
@@ -35,6 +39,7 @@ def check_for_dependency_update() -> None:
 
 
 def perform_database_migration() -> None:
+    """Run any SQL scripts on the local database"""
     try:
         from utils import get_conn
         db_conn = get_conn()
